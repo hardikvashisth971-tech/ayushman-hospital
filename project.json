@@ -1,0 +1,21 @@
+{
+  "overview": "A professional hospital website for Ayushman Hospital featuring online appointment scheduling, medical department showcases, doctor profiles, and emergency contact features. Built to improve patient access to healthcare information and services.",
+  "features": [
+    "Online appointment booking with department selection and availability calendar",
+    "Medical services showcase with dedicated department pages",
+    "Doctor directory with filterable profiles and individual doctor pages",
+    "Emergency hotline with one-click calling and 24/7 contact",
+    "Responsive design for all devices",
+    "Appointment confirmation with booking ID and local persistence"
+  ],
+  "category": "healthcare",
+  "tags": [
+    "hospital",
+    "healthcare",
+    "appointments",
+    "doctors",
+    "medical-services",
+    "responsive"
+  ],
+  "last_updated": "2026-05-03T08:45:10.723Z"
+}

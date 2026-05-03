@@ -1,0 +1,104 @@
+type WorkingHours = 
+ record {
+   days: text;
+   endTime: text;
+   startTime: text;
+ };
+type Timestamp = int;
+type TimeSlot = 
+ record {
+   endTime: text;
+   startTime: text;
+ };
+type HospitalInfo = 
+ record {
+   about: text;
+   address: text;
+   city: text;
+   email: text;
+   emergencyPhone: text;
+   establishedYear: nat;
+   name: text;
+   phone: text;
+   pincode: text;
+   state: text;
+   totalBeds: nat;
+   website: text;
+   workingHours: vec WorkingHours;
+ };
+type DoctorId = nat;
+type Doctor = 
+ record {
+   bio: text;
+   consultationFee: nat;
+   consultationHours: ConsultationHours;
+   departmentId: DepartmentId;
+   id: DoctorId;
+   imageUrl: text;
+   name: text;
+   qualification: text;
+   specialty: text;
+   yearsOfExperience: nat;
+ };
+type DepartmentId = nat;
+type Department = 
+ record {
+   availableEquipment: vec text;
+   description: text;
+   iconName: text;
+   id: nat;
+   keyTreatments: vec text;
+   name: text;
+ };
+type ConsultationHours = 
+ record {
+   days: text;
+   endTime: text;
+   startTime: text;
+ };
+type AppointmentStatus = 
+ variant {
+   cancelled;
+   confirmed;
+   pending;
+ };
+type AppointmentRequest = 
+ record {
+   date: text;
+   departmentId: DepartmentId;
+   doctorId: DoctorId;
+   notes: text;
+   patientEmail: text;
+   patientName: text;
+   patientPhone: text;
+   timeSlot: TimeSlot;
+ };
+type AppointmentId = nat;
+type Appointment = 
+ record {
+   createdAt: Timestamp;
+   date: text;
+   departmentId: DepartmentId;
+   doctorId: DoctorId;
+   id: AppointmentId;
+   notes: text;
+   patientEmail: text;
+   patientName: text;
+   patientPhone: text;
+   status: AppointmentStatus;
+   timeSlot: TimeSlot;
+ };
+service : {
+  bookAppointment: (req: AppointmentRequest) -> (Appointment);
+  cancelAppointment: (id: AppointmentId) -> (bool);
+  getAppointment: (id: AppointmentId) -> (opt Appointment) query;
+  getAvailableTimeSlots: (doctorId: DoctorId, date: text) ->
+   (vec TimeSlot) query;
+  getDepartment: (id: nat) -> (opt Department) query;
+  getDepartments: () -> (vec Department) query;
+  getDoctor: (id: DoctorId) -> (opt Doctor) query;
+  getDoctors: () -> (vec Doctor) query;
+  getDoctorsByDepartment: (departmentId: DepartmentId) -> (vec Doctor) query;
+  getHospitalInfo: () -> (HospitalInfo) query;
+  listAppointments: () -> (vec Appointment) query;
+}

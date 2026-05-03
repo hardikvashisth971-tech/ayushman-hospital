@@ -1,0 +1,68 @@
+// Version: 1.0.0
+type AppointmentId__729317175 = Nat;
+type AppointmentStatus__105197975 = {#cancelled; #confirmed; #pending};
+type Appointment__198984327 =
+  {
+    createdAt : Timestamp__301639476;
+    date : Text;
+    departmentId : DepartmentId__275990220;
+    doctorId : DoctorId__139287351;
+    id : AppointmentId__729317175;
+    notes : Text;
+    patientEmail : Text;
+    patientName : Text;
+    patientPhone : Text;
+    status : AppointmentStatus__105197975;
+    timeSlot : TimeSlot__803919203
+  };
+type ConsultationHours__46530705 =
+  {days : Text; endTime : Text; startTime : Text};
+type DepartmentId__275990220 = Nat;
+type Department__752247671 =
+  {
+    availableEquipment : [Text];
+    description : Text;
+    iconName : Text;
+    id : Nat;
+    keyTreatments : [Text];
+    name : Text
+  };
+type DoctorId__139287351 = Nat;
+type Doctor__290307863 =
+  {
+    bio : Text;
+    consultationFee : Nat;
+    consultationHours : ConsultationHours__46530705;
+    departmentId : DepartmentId__275990220;
+    id : DoctorId__139287351;
+    imageUrl : Text;
+    name : Text;
+    qualification : Text;
+    specialty : Text;
+    yearsOfExperience : Nat
+  };
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type TimeSlot__803919203 = {endTime : Text; startTime : Text};
+type Timestamp__301639476 = Int;
+actor {
+  stable appointments :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Appointment__198984327]];
+      var elementIndex : Nat__490723111
+    };
+  stable departments :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Department__752247671]];
+      var elementIndex : Nat__490723111
+    };
+  stable doctors :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Doctor__290307863]];
+      var elementIndex : Nat__490723111
+    };
+  stable nextIdBox : {var value : Nat}
+};
